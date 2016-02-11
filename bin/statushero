@@ -1,0 +1,53 @@
+#!/usr/bin/env node
+var argv = require('minimist')(process.argv.slice(2))
+var chalk = require('chalk')
+var statushero = require('..')
+
+if (argv.help) {
+  usage()
+  process.exit()
+}
+
+var username = argv.u || argv.username
+var password = argv.p || argv.password
+
+var yesterday = argv._[0]
+var today = argv._[1]
+var blockers = argv._[2];
+
+var required = [ username, password, yesterday, today ]
+
+required.forEach(function (option) {
+  if (!option) {
+    usage()
+    process.exit(1)
+  }
+})
+
+var client = statushero({
+  username: username,
+  password: password
+})
+
+var status = {
+  yesterday: yesterday,
+  today: today,
+  blockers: blockers
+}
+
+client.updateStatus(status, function (err) {
+  if (err) {
+    console.error(chalk.red('Error:'), err.message)
+    return process.exit(1)
+  } else {
+    console.error(chalk.green('Status Updated'))
+  }
+})
+
+function usage () {
+  console.log('Usage: statushero [options] yesterday today [blockers]')
+  console.log()
+  console.log('Options:')
+  console.log('\t-u, --username\t\tStatusHero username')
+  console.log('\t-p, --password\t\tStatusHero password')
+}

@@ -1,0 +1,29 @@
+{
+  "name": "statushero",
+  "version": "0.0.1",
+  "description": "Status Hero CLI and API",
+  "main": "index.js",
+  "bin": {
+    "statushero": "./bin/statushero"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "status",
+    "hero"
+  ],
+  "engine": {
+    "node": "node >= 4"
+  },
+  "author": "David Padbury <david@davidpadbury.com> (https://davidpadbury.com/)",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^1.5.2",
+    "chalk": "^1.1.1",
+    "invariant": "^2.2.0",
+    "jsdom": "^8.0.2",
+    "minimist": "^1.2.0",
+    "request": "^2.69.0"
+  }
+}
